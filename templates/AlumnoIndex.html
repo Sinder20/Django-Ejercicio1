@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          A simple danger alert—check it out!
+        </div>
+    {% endif %}
+
+    <h1>Registro de Alumnos</h1>
+    <div class="row col-13 justify-content-end mb-2 pr-0">
+    <a class="btn btn-info col-md-2.5" href="{% url 'listarAlumnos' %}">Alumnos Registrados</a>
+    </div>
+    <form action="{% url 'guardarAlumno' %}" method="post">
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-success" role="alert">
+              ¡Alumno registrado exitosamente!
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+{% endblock %}
